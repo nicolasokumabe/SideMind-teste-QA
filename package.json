@@ -1,0 +1,26 @@
+{
+  "name": "sidemind",
+  "version": "1.0.0",
+  "description": "Teste Vaga Quality Assurance - SideMind",
+  "main": "index.js",
+  "scripts": {
+    "test": "npx cypress run"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@github.com/nicolasokumabe/SideMind-teste-QA.git"
+  },
+  "keywords": [
+    "cypress",
+    "cucumber"
+  ],
+  "author": "Nicolas Kumabe",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/nicolasokumabe/SideMind-teste-QA/issues"
+  },
+  "homepage": "https://github.com/nicolasokumabe/SideMind-teste-QA#readme",
+  "devDependencies": {
+    "cypress": "^13.6.5"
+  }
+}
