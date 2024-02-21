@@ -1,0 +1,1 @@
+# SideMind-teste-QA
