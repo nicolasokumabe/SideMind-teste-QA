@@ -113,152 +113,192 @@ describe('home page', () => {
   //   })
   // })
 
-  describe('CT03', ()=>{
-    Cypress.on('uncaught:exception', (err, runnable) => {
-      return false
-    })
+  // describe('CT03', ()=>{
+  //   Cypress.on('uncaught:exception', (err, runnable) => {
+  //     return false
+  //   })
  
-    it('Dado que desejo filtrar a categoria "Android"', () => {
-      cy.visit('https://practice.automationtesting.in/shop/')
+  //   it('Dado que desejo filtrar a categoria "Android"', () => {
+  //     cy.visit('https://practice.automationtesting.in/shop/')
       
-      //verifica a existencia do campo "Product Categories"
-      cy.get('#woocommerce_product_categories-2').contains('Product Categories')
+  //     //verifica a existencia do campo "Product Categories"
+  //     cy.get('#woocommerce_product_categories-2').contains('Product Categories')
 
-      //Verifica a existencia da categoria "Android"
-      cy.get('.cat-item-24 > a').should('have.text', 'Android')
+  //     //Verifica a existencia da categoria "Android"
+  //     cy.get('.cat-item-24 > a').should('have.text', 'Android')
 
-      //Verifica a quantidade de livros da categoria "Android"
-      cy.get('.cat-item-24 > .count').contains(1)
-    })
+  //     //Verifica a quantidade de livros da categoria "Android"
+  //     cy.get('.cat-item-24 > .count').contains(1)
+  //   })
 
-    it('Quando clico na categoria "Android"', () => {
-      cy.visit('https://practice.automationtesting.in/shop/')
+  //   it('Quando clico na categoria "Android"', () => {
+  //     cy.visit('https://practice.automationtesting.in/shop/')
       
-      //Clique em "Android"
-      cy.get('.cat-item-24 > a').click()
-    })
+  //     //Clique em "Android"
+  //     cy.get('.cat-item-24 > a').click()
+  //   })
 
-    it('Entao devo ver apenas livros da categoria "Android"', () => {
-      cy.visit('https://practice.automationtesting.in/shop/')
+  //   it('Entao devo ver apenas livros da categoria "Android"', () => {
+  //     cy.visit('https://practice.automationtesting.in/shop/')
       
-      cy.get('.cat-item-24 > a').click()
+  //     cy.get('.cat-item-24 > a').click()
 
-      //Verificando os livros mostrados
-      cy.get('ul.products.masonry-done').within(() => {
+  //     //Verificando os livros mostrados
+  //     cy.get('ul.products.masonry-done').within(() => {
 
-        //Verificando se todos os livros sao da classe "Android"
-        cy.get('.product').each(($product) => {
-            cy.wrap($product).should('have.class', 'product_tag-android')
-        })
-      })
-    })
-  })
+  //       //Verificando se todos os livros sao da classe "Android"
+  //       cy.get('.product').each(($product) => {
+  //           cy.wrap($product).should('have.class', 'product_tag-android')
+  //       })
+  //     })
+  //   })
+  // })
 
-  describe('CT04', ()=>{
+  // describe('CT04', ()=>{
+  //   Cypress.on('uncaught:exception', (err, runnable) => {
+  //     return false
+  //   })
+
+  //   it('Dado que desejo filtrar a categoria "HTML"', () => {
+  //     cy.visit('https://practice.automationtesting.in/shop/')
+
+  //     //Verifica a existencia da categoria "HTML"
+  //     cy.get('.cat-item-19 > a').should('have.text', 'HTML')
+
+  //     //Verifica a quantidade de livros da categoria "HTML"
+  //     cy.get('.cat-item-19 > .count').contains(3)
+  //   })
+
+  //   it('Quando clico na categoria "HTML"', () => {
+  //     cy.visit('https://practice.automationtesting.in/shop/')
+      
+  //     //Clique em "HTML"
+  //     cy.get('.cat-item-19 > a').click()
+  //   })
+
+  //   it('Entao devo ver apenas livros da categoria "HTML"', () => {
+  //     cy.visit('https://practice.automationtesting.in/shop/')
+      
+  //     cy.get('.cat-item-19 > a').click()
+  //     cy.get('ul.products.masonry-done').within(() => {
+
+  //       //Verificando se todos os livros sao da classe "HTML"
+  //       cy.get('.product').each(($product) => {
+  //           cy.wrap($product).should('have.class', 'product_tag-html')
+  //       })
+  //     })
+  //   })
+  // })
+
+  // describe('CT05', ()=>{
+  //   Cypress.on('uncaught:exception', (err, runnable) => {
+  //     return false
+  //   })
+
+  //   it('Dado que desejo filtrar a categoria "JavaScript"', () => {
+  //     cy.visit('https://practice.automationtesting.in/shop/')
+
+  //     //Verifica a existencia da categoria "JavaScript"
+  //     cy.get('.cat-item-21 > a').should('have.text', 'JavaScript')
+
+  //     //Verifica a quantidade de livros da categoria "JavaScript"
+  //     cy.get('.cat-item-21 > .count').contains(3)
+  //   })
+
+  //   it('Quando clico na categoria "JavaScript"', () => {
+  //     cy.visit('https://practice.automationtesting.in/shop/')
+      
+  //     //Clique em "JavaScript"
+  //     cy.get('.cat-item-21 > a').click()
+  //   })
+
+  //   it('Entao devo ver apenas livros da categoria "JavaScript"', () => {
+  //     cy.visit('https://practice.automationtesting.in/shop/')
+
+  //     cy.get('.cat-item-21 > a').click()
+  //     cy.get('ul.products.masonry-done').within(() => {
+
+  //       //Verificando se todos os livros sao da classe "JavaScript"
+  //       cy.get('.product').each(($product) => {
+  //           cy.wrap($product).should('have.class', 'product_tag-javascript')
+  //       })
+  //     })
+  //   })
+  // })
+
+  // describe('CT06', ()=>{
+  //   Cypress.on('uncaught:exception', (err, runnable) => {
+  //     return false
+  //   })
+
+  //   it('Dado que desejo filtrar a categoria "selenium"', () => {
+  //     cy.visit('https://practice.automationtesting.in/shop/')
+
+  //     //Verifica a existencia da categoria "selenium"
+  //     cy.get('.cat-item-17 > a').should('have.text', 'selenium')
+
+  //     //Verifica a quantidade de livros da categoria "selenium"
+  //     cy.get('.cat-item-17 > .count').contains(1)
+  //   })
+
+  //   it('Quando clico na categoria "selenium"', () => {
+  //     cy.visit('https://practice.automationtesting.in/shop/')
+      
+  //     //Clique em "selenium"
+  //     cy.get('.cat-item-17 > a').click()
+  //   })
+
+  //   it('Entao devo ver apenas livros da categoria "selenium"', () => {
+  //     cy.visit('https://practice.automationtesting.in/shop/')
+
+  //     cy.get('.cat-item-17 > a').click()
+  //     cy.get('ul.products.masonry-done').within(() => {
+
+  //       //Verificando se todos os livros sao da classe "selenium"
+  //       cy.get('.product').each(($product) => {
+  //           cy.wrap($product).should('have.class', 'product_tag-selenium')
+  //       })
+  //     })
+  //   })
+  // })
+
+  describe('CT07', ()=>{
     Cypress.on('uncaught:exception', (err, runnable) => {
       return false
     })
 
-    it('Dado que desejo filtrar a categoria "HTML"', () => {
+    it('Dado que desejo organizar a lista de livros por popularidade', () => {
       cy.visit('https://practice.automationtesting.in/shop/')
 
-      //Verifica a existencia da categoria "HTML"
-      cy.get('.cat-item-19 > a').should('have.text', 'HTML')
-
-      //Verifica a quantidade de livros da categoria "HTML"
-      cy.get('.cat-item-19 > .count').contains(3)
+      //Verifica se existe a opcao de organizar os livros
+      cy.get('.orderby')
     })
 
-    it('Quando clico na categoria "HTML"', () => {
-      cy.visit('https://practice.automationtesting.in/shop/')
-      
-      //Clique em "HTML"
-      cy.get('.cat-item-19 > a').click()
-    })
-
-    it('Entao devo ver apenas livros da categoria "HTML"', () => {
-      cy.visit('https://practice.automationtesting.in/shop/')
-      
-      cy.get('.cat-item-19 > a').click()
-      cy.get('ul.products.masonry-done').within(() => {
-
-        //Verificando se todos os livros sao da classe "HTML"
-        cy.get('.product').each(($product) => {
-            cy.wrap($product).should('have.class', 'product_tag-html')
-        })
-      })
-    })
-  })
-
-  describe('CT05', ()=>{
-    Cypress.on('uncaught:exception', (err, runnable) => {
-      return false
-    })
-
-    it('Dado que desejo filtrar a categoria "JavaScript"', () => {
+    it('Quando seleciono a opcao de "Sort by popularity"', () => {
       cy.visit('https://practice.automationtesting.in/shop/')
 
-      //Verifica a existencia da categoria "JavaScript"
-      cy.get('.cat-item-21 > a').should('have.text', 'JavaScript')
-
-      //Verifica a quantidade de livros da categoria "JavaScript"
-      cy.get('.cat-item-21 > .count').contains(3)
+      //Seleciona a opcao "Sort by popularity"
+      cy.get('select[name="orderby"].orderby').select('popularity')
     })
 
-    it('Quando clico na categoria "JavaScript"', () => {
-      cy.visit('https://practice.automationtesting.in/shop/')
-      
-      //Clique em "JavaScript"
-      cy.get('.cat-item-21 > a').click()
-    })
-
-    it('Entao devo ver apenas livros da categoria "JavaScript"', () => {
+    it('Entao o livro "Android Quick Start Guide" deve ser o primeiro', () => {
       cy.visit('https://practice.automationtesting.in/shop/')
 
-      cy.get('.cat-item-21 > a').click()
-      cy.get('ul.products.masonry-done').within(() => {
+      cy.get('select[name="orderby"].orderby').select('popularity')
 
-        //Verificando se todos os livros sao da classe "JavaScript"
-        cy.get('.product').each(($product) => {
-            cy.wrap($product).should('have.class', 'product_tag-javascript')
-        })
-      })
-    })
-  })
-
-  describe('CT06', ()=>{
-    Cypress.on('uncaught:exception', (err, runnable) => {
-      return false
+      //Verifica se "Android Quick Start Guide" vem primeiro
+      cy.get('ul.products.masonry-done li:first-child h3')
+        .should('have.text', 'Android Quick Start Guide')
     })
 
-    it('Dado que desejo filtrar a categoria "selenium"', () => {
+    it('Entao o livro "JS Data Structures and Algorithm" deve ser o ultimo', () => {
       cy.visit('https://practice.automationtesting.in/shop/')
 
-      //Verifica a existencia da categoria "selenium"
-      cy.get('.cat-item-17 > a').should('have.text', 'selenium')
+      cy.get('select[name="orderby"].orderby').select('popularity')
 
-      //Verifica a quantidade de livros da categoria "selenium"
-      cy.get('.cat-item-17 > .count').contains(1)
-    })
-
-    it('Quando clico na categoria "selenium"', () => {
-      cy.visit('https://practice.automationtesting.in/shop/')
-      
-      //Clique em "selenium"
-      cy.get('.cat-item-17 > a').click()
-    })
-
-    it('Entao devo ver apenas livros da categoria "selenium"', () => {
-      cy.visit('https://practice.automationtesting.in/shop/')
-
-      cy.get('.cat-item-17 > a').click()
-      cy.get('ul.products.masonry-done').within(() => {
-
-        //Verificando se todos os livros sao da classe "selenium"
-        cy.get('.product').each(($product) => {
-            cy.wrap($product).should('have.class', 'product_tag-selenium')
-        })
-      })
+      //Verifica se "JS Data Structures and Algorithm" vem por ultimo
+      cy.get('ul.products.masonry-done li:last-child h3')
+        .should('have.text', 'JS Data Structures and Algorithm')
     })
   })
 })
