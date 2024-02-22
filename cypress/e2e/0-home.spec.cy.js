@@ -301,4 +301,37 @@ describe('home page', () => {
         .should('have.text', 'JS Data Structures and Algorithm')
     })
   })
+
+  describe('CT08', ()=>{
+    Cypress.on('uncaught:exception', (err, runnable) => {
+      return false
+    })
+
+    it('Quando seleciono a opcao de "Sort by average rating"', () => {
+      cy.visit('https://practice.automationtesting.in/shop/')
+
+      //Seleciona a opcao "Sort by average rating"
+      cy.get('select[name="orderby"].orderby').select('rating')
+    })
+
+    it('Entao o livro "Selenium Ruby" deve ser o primeiro', () => {
+      cy.visit('https://practice.automationtesting.in/shop/')
+
+      cy.get('select[name="orderby"].orderby').select('rating')
+
+      //Verifica se "Selenium Ruby" vem primeiro
+      cy.get('ul.products.masonry-done li:first-child h3')
+        .should('have.text', 'Selenium Ruby')
+    })
+
+    it('Entao o livro "HTML5 WebApp Develpment" deve ser o ultimo', () => {
+      cy.visit('https://practice.automationtesting.in/shop/')
+
+      cy.get('select[name="orderby"].orderby').select('rating')
+
+      //Verifica se "HTML5 WebApp Develpment" vem por ultimo
+      cy.get('ul.products.masonry-done li:last-child h3')
+        .should('have.text', 'HTML5 WebApp Develpment')
+    })
+  })
 })
