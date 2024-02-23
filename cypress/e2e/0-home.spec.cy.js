@@ -368,57 +368,116 @@ describe('home page', () => {
   //   })
   // })
 
-  describe('CT10', ()=>{
+  // describe('CT10', ()=>{
+  //   Cypress.on('uncaught:exception', (err, runnable) => {
+  //     return false
+  //   })
+
+  //   it('Quando seleciono a opcao de "Sort by price: low to high"', () => {
+  //     cy.visit('https://practice.automationtesting.in/shop/')
+
+  //     //Seleciona a opcao "Sort by price: low to high"
+  //     cy.get('select[name="orderby"].orderby').select('price')
+  //   })
+
+  //   it('Entao o preco deve estar na ordem crescente', () => {
+  //     cy.visit('https://practice.automationtesting.in/shop/')
+
+  //     cy.get('select[name="orderby"].orderby').select('price')
+
+  //     cy.get('.price .woocommerce-Price-amount').invoke('text').then(pricesString => {
+  //       //Converte sting em array
+  //       const numericPrices = pricesString.split('\n').map(price => parseFloat(price.replace('₹', '').trim()))
+  
+  //       //Verifica se esta em ordem crescente
+  //       const isSorted = numericPrices.every((price, index, array) => index === 0 || price >= array[index - 1])
+  //       expect(isSorted).to.be.true
+  //     })
+  //   })
+  // })
+
+  // describe('CT11', ()=>{
+  //   Cypress.on('uncaught:exception', (err, runnable) => {
+  //     return false
+  //   })
+
+  //   it('Quando seleciono a opcao de "Sort by price: high to low"', () => {
+  //     cy.visit('https://practice.automationtesting.in/shop/')
+
+  //     //Seleciona a opcao "Sort by price: high to low"
+  //     cy.get('select[name="orderby"].orderby').select('price-desc')
+  //   })
+
+  //   it('Entao o preco deve estar na ordem decrescente', () => {
+  //     cy.visit('https://practice.automationtesting.in/shop/')
+
+  //     cy.get('select[name="orderby"].orderby').select('price-desc')
+
+  //     cy.get('.price .woocommerce-Price-amount').invoke('text').then(pricesString => {
+  //       const numericPrices = pricesString.split('\n').map(price => parseFloat(price.replace('₹', '').trim()))
+
+  //       //Verifica se esta em ordem decrescente
+  //       const isSorted = numericPrices.every((price, index, array) => index === 0 || price <= array[index - 1])
+  //       expect(isSorted).to.be.true
+  //     })
+  //   })
+  // })
+
+  describe('CT12', ()=>{
     Cypress.on('uncaught:exception', (err, runnable) => {
       return false
     })
 
-    it('Quando seleciono a opcao de "Sort by price: low to high"', () => {
+    it('Dado que desejo comprar um livro na promocao', () => {
       cy.visit('https://practice.automationtesting.in/shop/')
 
-      //Seleciona a opcao "Sort by price: low to high"
-      cy.get('select[name="orderby"].orderby').select('price')
+      //Validaa existencia produtos em promocao
+      cy.get('.onsale')
     })
 
-    it('Entao o preco deve estar na ordem crescente', () => {
+    it('Quando inicio a compra desse item', () => {
       cy.visit('https://practice.automationtesting.in/shop/')
 
-      cy.get('select[name="orderby"].orderby').select('price')
+      //Verifico se o produto "Thinking in HTML" existe
+      cy.get('.post-163')
 
-      cy.get('.price .woocommerce-Price-amount').invoke('text').then(pricesString => {
-        //Converte sting em array
-        const numericPrices = pricesString.split('\n').map(price => parseFloat(price.replace('₹', '').trim()))
-  
-        //Verifica se esta em ordem crescente
-        const isSorted = numericPrices.every((price, index, array) => index === 0 || price >= array[index - 1])
-        expect(isSorted).to.be.true
+      //Verifica se o produto estah em promocao
+      cy.get('.post-163 > .woocommerce-LoopProduct-link > .onsale').should('have.text', 'Sale!')
+
+      //Faco o evento de clique
+      cy.get('.post-163').click()
+
+      //Verifica se foi para o site do produto
+      cy.get('.woocommerce-breadcrumb').contains('Home / HTML / Thinking in HTML')
+
+      //Verifica se a imagem estah quebrada
+      cy.get('.images img').should('be.visible').then($img => {
+        expect($img[0].naturalWidth).to.be.greaterThan(0)
       })
     })
-  })
 
-  describe('CT11', ()=>{
-    Cypress.on('uncaught:exception', (err, runnable) => {
-      return false
-    })
-
-    it('Quando seleciono a opcao de "Sort by price: high to low"', () => {
+    it('Entao devo ver a promocao do produto', () => {
       cy.visit('https://practice.automationtesting.in/shop/')
 
-      //Seleciona a opcao "Sort by price: high to low"
-      cy.get('select[name="orderby"].orderby').select('price-desc')
-    })
+      cy.get('.post-163').click()
+      cy.get('.woocommerce-breadcrumb').contains('Home / HTML / Thinking in HTML')
+      cy.get('.images img').should('be.visible').then($img => {
+        expect($img[0].naturalWidth).to.be.greaterThan(0)
+      })
 
-    it('Entao o preco deve estar na ordem decrescente', () => {
-      cy.visit('https://practice.automationtesting.in/shop/')
+      //Verifica se existe um preco antigo
+      cy.get('del > .woocommerce-Price-amount')
 
-      cy.get('select[name="orderby"].orderby').select('price-desc')
+      //Verifica se existe um preco novo
+      cy.get('ins > .woocommerce-Price-amount')
 
-      cy.get('.price .woocommerce-Price-amount').invoke('text').then(pricesString => {
-        const numericPrices = pricesString.split('\n').map(price => parseFloat(price.replace('₹', '').trim()))
-
-        //Verifica se esta em ordem decrescente
-        const isSorted = numericPrices.every((price, index, array) => index === 0 || price <= array[index - 1])
-        expect(isSorted).to.be.true
+      //Verifica se o valor riscado eh mais caro que o valor atual
+      cy.get('.price del .woocommerce-Price-amount, .price ins .woocommerce-Price-amount')
+        .then($elements => {
+        const valor_antigo = parseFloat($elements.first().text().replace('₹', '').trim())
+        const valor_promocionalr = parseFloat($elements.last().text().replace('₹', '').trim())
+  
+        expect(valor_antigo).to.be.greaterThan(valor_promocionalr)
       })
     })
   })
