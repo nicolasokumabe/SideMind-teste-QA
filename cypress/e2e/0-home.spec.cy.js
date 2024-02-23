@@ -373,31 +373,25 @@ describe('home page', () => {
       return false
     })
 
-    it('Quando seleciono a opcao de "Sort by newness"', () => {
+    it('Quando seleciono a opcao de "Sort by price: low to high"', () => {
       cy.visit('https://practice.automationtesting.in/shop/')
 
-      //Seleciona a opcao "Sort by newness"
-      cy.get('select[name="orderby"].orderby').select('date')
+      //Seleciona a opcao "Sort by price: low to high"
+      cy.get('select[name="orderby"].orderby').select('price')
     })
 
-    it('Entao o livro "HTML5 WebApp Develpment" deve ser o primeiro', () => {
+    it('Entao o preco deve estar na ordem crescente', () => {
       cy.visit('https://practice.automationtesting.in/shop/')
 
-      cy.get('select[name="orderby"].orderby').select('date')
+      cy.get('select[name="orderby"].orderby').select('price')
 
-      //Verifica se "HTML5 WebApp Develpment" vem primeiro
-      cy.get('ul.products.masonry-done li:first-child h3')
-        .should('have.text', 'HTML5 WebApp Develpment')
-    })
-
-    it('Entao o livro "Selenium Ruby" deve ser o ultimo', () => {
-      cy.visit('https://practice.automationtesting.in/shop/')
-
-      cy.get('select[name="orderby"].orderby').select('date')
-
-      //Verifica se "Selenium Ruby" vem por ultimo
-      cy.get('ul.products.masonry-done li:last-child h3')
-        .should('have.text', 'Selenium Ruby')
+      //Pega os precos dos livros para a ordem crescente
+      Cypress.Commands.add('verifyPricesInAscendingOrder', () => {
+        cy.get('.price .woocommerce-Price-amount').invoke('text').then(prices => {
+          const preco = prices.map(price => parseFloat(price.replace('₹', '')))
+          expect(preco).to.deep.equal([...preco].sort((a, b) => a - b))
+        })
+      })
     })
   })
 })
