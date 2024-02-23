@@ -262,76 +262,164 @@ describe('home page', () => {
   //   })
   // })
 
-  describe('CT07', ()=>{
+  // describe('CT07', ()=>{
+  //   Cypress.on('uncaught:exception', (err, runnable) => {
+  //     return false
+  //   })
+
+  //   it('Dado que desejo organizar a lista de livros por popularidade', () => {
+  //     cy.visit('https://practice.automationtesting.in/shop/')
+
+  //     //Verifica se existe a opcao de organizar os livros
+  //     cy.get('.orderby')
+  //   })
+
+  //   it('Quando seleciono a opcao de "Sort by popularity"', () => {
+  //     cy.visit('https://practice.automationtesting.in/shop/')
+
+  //     //Seleciona a opcao "Sort by popularity"
+  //     cy.get('select[name="orderby"].orderby').select('popularity')
+  //   })
+
+  //   it('Entao o livro "Android Quick Start Guide" deve ser o primeiro', () => {
+  //     cy.visit('https://practice.automationtesting.in/shop/')
+
+  //     cy.get('select[name="orderby"].orderby').select('popularity')
+
+  //     //Verifica se "Android Quick Start Guide" vem primeiro
+  //     cy.get('ul.products.masonry-done li:first-child h3')
+  //       .should('have.text', 'Android Quick Start Guide')
+  //   })
+
+  //   it('Entao o livro "JS Data Structures and Algorithm" deve ser o ultimo', () => {
+  //     cy.visit('https://practice.automationtesting.in/shop/')
+
+  //     cy.get('select[name="orderby"].orderby').select('popularity')
+
+  //     //Verifica se "JS Data Structures and Algorithm" vem por ultimo
+  //     cy.get('ul.products.masonry-done li:last-child h3')
+  //       .should('have.text', 'JS Data Structures and Algorithm')
+  //   })
+  // })
+
+  // describe('CT08', ()=>{
+  //   Cypress.on('uncaught:exception', (err, runnable) => {
+  //     return false
+  //   })
+
+  //   it('Quando seleciono a opcao de "Sort by average rating"', () => {
+  //     cy.visit('https://practice.automationtesting.in/shop/')
+
+  //     //Seleciona a opcao "Sort by average rating"
+  //     cy.get('select[name="orderby"].orderby').select('rating')
+  //   })
+
+  //   it('Entao o livro "Selenium Ruby" deve ser o primeiro', () => {
+  //     cy.visit('https://practice.automationtesting.in/shop/')
+
+  //     cy.get('select[name="orderby"].orderby').select('rating')
+
+  //     //Verifica se "Selenium Ruby" vem primeiro
+  //     cy.get('ul.products.masonry-done li:first-child h3')
+  //       .should('have.text', 'Selenium Ruby')
+  //   })
+
+  //   it('Entao o livro "HTML5 WebApp Develpment" deve ser o ultimo', () => {
+  //     cy.visit('https://practice.automationtesting.in/shop/')
+
+  //     cy.get('select[name="orderby"].orderby').select('rating')
+
+  //     //Verifica se "HTML5 WebApp Develpment" vem por ultimo
+  //     cy.get('ul.products.masonry-done li:last-child h3')
+  //       .should('have.text', 'HTML5 WebApp Develpment')
+  //   })
+  // })
+
+  // describe('CT09', ()=>{
+  //   Cypress.on('uncaught:exception', (err, runnable) => {
+  //     return false
+  //   })
+
+  //   it('Quando seleciono a opcao de "Sort by newness"', () => {
+  //     cy.visit('https://practice.automationtesting.in/shop/')
+
+  //     //Seleciona a opcao "Sort by newness"
+  //     cy.get('select[name="orderby"].orderby').select('date')
+  //   })
+
+  //   it('Entao o livro "HTML5 WebApp Develpment" deve ser o primeiro', () => {
+  //     cy.visit('https://practice.automationtesting.in/shop/')
+
+  //     cy.get('select[name="orderby"].orderby').select('date')
+
+  //     //Verifica se "HTML5 WebApp Develpment" vem primeiro
+  //     cy.get('ul.products.masonry-done li:first-child h3')
+  //       .should('have.text', 'HTML5 WebApp Develpment')
+  //   })
+
+  //   it('Entao o livro "Selenium Ruby" deve ser o ultimo', () => {
+  //     cy.visit('https://practice.automationtesting.in/shop/')
+
+  //     cy.get('select[name="orderby"].orderby').select('date')
+
+  //     //Verifica se "Selenium Ruby" vem por ultimo
+  //     cy.get('ul.products.masonry-done li:last-child h3')
+  //       .should('have.text', 'Selenium Ruby')
+  //   })
+  // })
+
+  describe('CT10', ()=>{
     Cypress.on('uncaught:exception', (err, runnable) => {
       return false
     })
 
-    it('Dado que desejo organizar a lista de livros por popularidade', () => {
+    it('Quando seleciono a opcao de "Sort by price: low to high"', () => {
       cy.visit('https://practice.automationtesting.in/shop/')
 
-      //Verifica se existe a opcao de organizar os livros
-      cy.get('.orderby')
+      //Seleciona a opcao "Sort by price: low to high"
+      cy.get('select[name="orderby"].orderby').select('price')
     })
 
-    it('Quando seleciono a opcao de "Sort by popularity"', () => {
+    it('Entao o preco deve estar na ordem crescente', () => {
       cy.visit('https://practice.automationtesting.in/shop/')
 
-      //Seleciona a opcao "Sort by popularity"
-      cy.get('select[name="orderby"].orderby').select('popularity')
-    })
+      cy.get('select[name="orderby"].orderby').select('price')
 
-    it('Entao o livro "Android Quick Start Guide" deve ser o primeiro', () => {
-      cy.visit('https://practice.automationtesting.in/shop/')
-
-      cy.get('select[name="orderby"].orderby').select('popularity')
-
-      //Verifica se "Android Quick Start Guide" vem primeiro
-      cy.get('ul.products.masonry-done li:first-child h3')
-        .should('have.text', 'Android Quick Start Guide')
-    })
-
-    it('Entao o livro "JS Data Structures and Algorithm" deve ser o ultimo', () => {
-      cy.visit('https://practice.automationtesting.in/shop/')
-
-      cy.get('select[name="orderby"].orderby').select('popularity')
-
-      //Verifica se "JS Data Structures and Algorithm" vem por ultimo
-      cy.get('ul.products.masonry-done li:last-child h3')
-        .should('have.text', 'JS Data Structures and Algorithm')
+      cy.get('.price .woocommerce-Price-amount').invoke('text').then(pricesString => {
+        //Converte sting em array
+        const numericPrices = pricesString.split('\n').map(price => parseFloat(price.replace('₹', '').trim()))
+  
+        //Verifica se esta em ordem crescente
+        const isSorted = numericPrices.every((price, index, array) => index === 0 || price >= array[index - 1])
+        expect(isSorted).to.be.true
+      })
     })
   })
 
-  describe('CT08', ()=>{
+  describe('CT11', ()=>{
     Cypress.on('uncaught:exception', (err, runnable) => {
       return false
     })
 
-    it('Quando seleciono a opcao de "Sort by average rating"', () => {
+    it('Quando seleciono a opcao de "Sort by price: high to low"', () => {
       cy.visit('https://practice.automationtesting.in/shop/')
 
-      //Seleciona a opcao "Sort by average rating"
-      cy.get('select[name="orderby"].orderby').select('rating')
+      //Seleciona a opcao "Sort by price: high to low"
+      cy.get('select[name="orderby"].orderby').select('price-desc')
     })
 
-    it('Entao o livro "Selenium Ruby" deve ser o primeiro', () => {
+    it('Entao o preco deve estar na ordem decrescente', () => {
       cy.visit('https://practice.automationtesting.in/shop/')
 
-      cy.get('select[name="orderby"].orderby').select('rating')
+      cy.get('select[name="orderby"].orderby').select('price-desc')
 
-      //Verifica se "Selenium Ruby" vem primeiro
-      cy.get('ul.products.masonry-done li:first-child h3')
-        .should('have.text', 'Selenium Ruby')
-    })
+      cy.get('.price .woocommerce-Price-amount').invoke('text').then(pricesString => {
+        const numericPrices = pricesString.split('\n').map(price => parseFloat(price.replace('₹', '').trim()))
 
-    it('Entao o livro "HTML5 WebApp Develpment" deve ser o ultimo', () => {
-      cy.visit('https://practice.automationtesting.in/shop/')
-
-      cy.get('select[name="orderby"].orderby').select('rating')
-
-      //Verifica se "HTML5 WebApp Develpment" vem por ultimo
-      cy.get('ul.products.masonry-done li:last-child h3')
-        .should('have.text', 'HTML5 WebApp Develpment')
+        //Verifica se esta em ordem decrescente
+        const isSorted = numericPrices.every((price, index, array) => index === 0 || price <= array[index - 1])
+        expect(isSorted).to.be.true
+      })
     })
   })
 })
