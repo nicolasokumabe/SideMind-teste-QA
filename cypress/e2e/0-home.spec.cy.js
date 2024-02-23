@@ -385,12 +385,40 @@ describe('home page', () => {
 
       cy.get('select[name="orderby"].orderby').select('price')
 
-      //Pega os precos dos livros para a ordem crescente
-      Cypress.Commands.add('verifyPricesInAscendingOrder', () => {
-        cy.get('.price .woocommerce-Price-amount').invoke('text').then(prices => {
-          const preco = prices.map(price => parseFloat(price.replace('₹', '')))
-          expect(preco).to.deep.equal([...preco].sort((a, b) => a - b))
-        })
+      cy.get('.price .woocommerce-Price-amount').invoke('text').then(pricesString => {
+        //Converte sting em array
+        const numericPrices = pricesString.split('\n').map(price => parseFloat(price.replace('₹', '').trim()))
+  
+        //Verifica se esta em ordem crescente
+        const isSorted = numericPrices.every((price, index, array) => index === 0 || price >= array[index - 1])
+        expect(isSorted).to.be.true
+      })
+    })
+  })
+
+  describe('CT11', ()=>{
+    Cypress.on('uncaught:exception', (err, runnable) => {
+      return false
+    })
+
+    it('Quando seleciono a opcao de "Sort by price: high to low"', () => {
+      cy.visit('https://practice.automationtesting.in/shop/')
+
+      //Seleciona a opcao "Sort by price: high to low"
+      cy.get('select[name="orderby"].orderby').select('price-desc')
+    })
+
+    it('Entao o preco deve estar na ordem decrescente', () => {
+      cy.visit('https://practice.automationtesting.in/shop/')
+
+      cy.get('select[name="orderby"].orderby').select('price-desc')
+
+      cy.get('.price .woocommerce-Price-amount').invoke('text').then(pricesString => {
+        const numericPrices = pricesString.split('\n').map(price => parseFloat(price.replace('₹', '').trim()))
+
+        //Verifica se esta em ordem decrescente
+        const isSorted = numericPrices.every((price, index, array) => index === 0 || price <= array[index - 1])
+        expect(isSorted).to.be.true
       })
     })
   })
