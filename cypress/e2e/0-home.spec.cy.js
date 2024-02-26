@@ -532,7 +532,7 @@ describe('home page', () => {
         //O imposto eh 2 por cento do produto
         const valor_com_imposto = preco * 0.02
 
-        //verificando se o valor do imposto foi cobrado corretamente
+        //Verifica se o valor do imposto foi cobrado corretamente
         expect(imposto).to.be.equal(valor_com_imposto)
       })
     })
@@ -588,6 +588,196 @@ describe('home page', () => {
 
         cy.get('strong > .woocommerce-Price-amount').should('have.text', `₹${valor_total}.00`)
       })
+    })
+  })
+
+  describe('CT14', ()=>{
+    Cypress.on('uncaught:exception', (err, runnable) => {
+      return false
+    })
+
+    it('Dado que estou na pagina do produto "Selenium Ruby"', () => {
+      cy.visit('https://practice.automationtesting.in/product/selenium-ruby/')
+
+      cy.get('.woocommerce-breadcrumb').contains('Home / selenium / Selenium Ruby')
+      cy.get('.product_title').should('have.text', 'Selenium Ruby')
+    })
+
+    it('Dado que desejo ver a descricao do livro', () => {
+      cy.visit('https://practice.automationtesting.in/product/selenium-ruby/')
+
+      cy.get('.woocommerce-breadcrumb').contains('Home / selenium / Selenium Ruby')
+      cy.get('.product_title').should('have.text', 'Selenium Ruby')
+
+      cy.get('.description_tab > a')
+    })
+
+    it('Quando clico em "DESCRIPTION"', () => {
+      cy.visit('https://practice.automationtesting.in/product/selenium-ruby/')
+
+      cy.get('.woocommerce-breadcrumb').contains('Home / selenium / Selenium Ruby')
+      cy.get('.product_title').should('have.text', 'Selenium Ruby')
+
+      //Clica em descricao
+      cy.get('.description_tab > a').click()
+    })
+
+    it('Entao devo ver um texto descrevendo o produto', () => {
+      cy.visit('https://practice.automationtesting.in/product/selenium-ruby/')
+
+      cy.get('.woocommerce-breadcrumb').contains('Home / selenium / Selenium Ruby')
+      cy.get('.product_title').should('have.text', 'Selenium Ruby')
+      cy.get('.description_tab > a').click()
+
+      //Confere se existe texto de descricao
+      cy.get('#tab-description > p')
+    })
+  })
+
+  describe('CT15', ()=>{
+    Cypress.on('uncaught:exception', (err, runnable) => {
+      return false
+    })
+
+    it('Dado que estou na pagina do produto "HTML5 Forms"', () => {
+      cy.visit('https://practice.automationtesting.in/product/html5-forms/')
+
+      cy.get('.woocommerce-breadcrumb').contains('Home / HTML / HTML5 Forms')
+      cy.get('.product_title').should('have.text', 'HTML5 Forms')
+    })
+
+    it('E que desejo ver as criticas do livro', () => {
+      cy.visit('https://practice.automationtesting.in/product/html5-forms/')
+
+      cy.get('.woocommerce-breadcrumb').contains('Home / HTML / HTML5 Forms')
+      cy.get('.product_title').should('have.text', 'HTML5 Forms')
+
+      cy.get('.reviews_tab > a')
+    })
+
+    it('Quando clico em "REVIEWS"', () => {
+      cy.visit('https://practice.automationtesting.in/product/html5-forms/')
+
+      cy.get('.woocommerce-breadcrumb').contains('Home / HTML / HTML5 Forms')
+      cy.get('.product_title').should('have.text', 'HTML5 Forms')
+
+      //Clica em reviews
+      cy.get('.reviews_tab > a').click()
+    })
+
+    it('Entao devo ver o texto "There are no reviews yet."', () => {
+      cy.visit('https://practice.automationtesting.in/product/html5-forms/')
+
+      cy.get('.woocommerce-breadcrumb').contains('Home / HTML / HTML5 Forms')
+      cy.get('.product_title').should('have.text', 'HTML5 Forms')
+      cy.get('.reviews_tab > a').click()
+
+      //Confere o texto do campo de review
+      cy.get('.woocommerce-noreviews').should('have.text', 'There are no reviews yet.')
+    })
+  })
+
+  describe('CT16', ()=>{
+    Cypress.on('uncaught:exception', (err, runnable) => {
+      return false
+    })
+
+    it('Dado que estou na pagina do produto "Android Quick Start Guide"', () => {
+      cy.visit('https://practice.automationtesting.in/product/android-quick-start-guide/')
+
+      cy.get('.woocommerce-breadcrumb').contains('Home / Android / Android Quick Start Guide')
+      cy.get('.product_title').should('have.text', 'Android Quick Start Guide')
+    })
+
+    it('Dado que desejo criticar o livro', () => {
+      cy.visit('https://practice.automationtesting.in/product/android-quick-start-guide/')
+
+      cy.get('.woocommerce-breadcrumb').contains('Home / Android / Android Quick Start Guide')
+      cy.get('.product_title').should('have.text', 'Android Quick Start Guide')
+
+      cy.get('.reviews_tab > a')
+    })
+
+    it('Quando clico em "REVIEWS"', () => {
+      cy.visit('https://practice.automationtesting.in/product/android-quick-start-guide/')
+
+      cy.get('.woocommerce-breadcrumb').contains('Home / Android / Android Quick Start Guide')
+      cy.get('.product_title').should('have.text', 'Android Quick Start Guide')
+
+      //Clica em reviews
+      cy.get('.reviews_tab > a').click()
+    })
+
+    it('Quando Preencho so campos "Your Rating", "Your Review", "Name" e "Email"', () => {
+      cy.visit('https://practice.automationtesting.in/product/android-quick-start-guide/')
+
+      cy.get('.woocommerce-breadcrumb').contains('Home / Android / Android Quick Start Guide')
+      cy.get('.product_title').should('have.text', 'Android Quick Start Guide')
+      cy.get('.reviews_tab > a').click()
+
+      //Da 3 estrelas
+      cy.get('.star-3').click()
+
+      //Dando meu review
+      cy.get('#comment').type('Na SideMind, acreditamos na sinergia entre pensamento estratégico e tecnologia inovadora. Explore conosco um mundo onde sua visão ganha vida, impulsionada pela complementaridade de mentes dedicadas a potencializar o crescimento do seu negócio. Conecte-se à inovação, conecte-se à SideMind.')
+
+      //Nome
+      cy.get('#author').type('Nicolas Kumabe')
+
+      //Email
+      cy.get('#email').type('nicolas.kumabe@sidemind.com')
+    })
+
+    it('E clico no botao "SUBMIT"', () => {
+      cy.visit('https://practice.automationtesting.in/product/android-quick-start-guide/')
+
+      cy.get('.woocommerce-breadcrumb').contains('Home / Android / Android Quick Start Guide')
+      cy.get('.product_title').should('have.text', 'Android Quick Start Guide')
+      cy.get('.reviews_tab > a').click()
+      cy.get('.star-3').click()
+      cy.get('#comment').type('Na SideMind, acreditamos na sinergia entre pensamento estratégico e tecnologia inovadora. Explore conosco um mundo onde sua visão ganha vida, impulsionada pela complementaridade de mentes dedicadas a potencializar o crescimento do seu negócio. Conecte-se à inovação, conecte-se à SideMind.')
+      cy.get('#author').type('Nicolas Kumabe')
+      cy.get('#email').type('nicolas.kumabe@sidemind.com')
+
+      //Evento de click no botao Submit
+      cy.get('#submit').click(2)
+    })
+
+    it('Entao devo ver um esboco da review', () => {
+      const frase = 'Potencializando Seu Pensamento, Elevando Seu Negócio.'
+
+      cy.visit('https://practice.automationtesting.in/product/android-quick-start-guide/')
+
+      cy.get('.woocommerce-breadcrumb').contains('Home / Android / Android Quick Start Guide')
+      cy.get('.product_title').should('have.text', 'Android Quick Start Guide')
+      cy.get('.reviews_tab > a').click()
+      cy.get('.star-3').click()
+      cy.get('#comment').type(`${frase}`)
+      cy.get('#author').type('Nicolas Kumabe')
+      cy.get('#email').type('nicolas.kumabe@sidemind.com')
+      cy.get('#submit').click(2)
+
+      //Esboco da review
+      cy.get('.commentlist').contains(`${frase}`)
+    })
+
+    it('E ver a mensagem "Your comment is awaiting approval"', () => {
+      const frase = 'Esta é nossa característica distintiva, fundamental para o êxito de nosso empreendimento'
+
+      cy.visit('https://practice.automationtesting.in/product/android-quick-start-guide/')
+
+      cy.get('.woocommerce-breadcrumb').contains('Home / Android / Android Quick Start Guide')
+      cy.get('.product_title').should('have.text', 'Android Quick Start Guide')
+      cy.get('.reviews_tab > a').click()
+      cy.get('.star-3').click()
+      cy.get('#comment').type(`${frase}`)
+      cy.get('#author').type('Nicolas Kumabe')
+      cy.get('#email').type('nicolas.kumabe@sidemind.com')
+      cy.get('#submit').click(2)
+      cy.get('.commentlist').contains(`${frase}`)
+
+      //Mensagem de espera de aprovacao
+      cy.get('em').contains('Your comment is awaiting approval')
     })
   })
 })
